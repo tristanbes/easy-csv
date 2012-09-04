@@ -8,12 +8,14 @@ abstract class AbstractBase
     protected $_delimiter = ',';
     protected $_enclosure = '"';
 
-    public function __construct($path, $mode = 'r+')
+    public function __construct($path, $mode = 'r+', $delimiter = ',', $enclosure = '"')
     {
-        if ( ! file_exists($path)) {
+        if (!file_exists($path)) {
             touch($path);
         }
         $this->_handle = fopen($path, $mode);
+        $this->_delimiter = $delimiter;
+        $this->_enclosure = $enclosure;
     }
 
     public function __destruct()
@@ -21,5 +23,15 @@ abstract class AbstractBase
         if (is_resource($this->_handle)) {
             fclose($this->_handle);
         }
+    }
+    
+    public function setDelimiter($delimiter)
+    {
+        $this->_delimiter = $delimiter;
+    }
+    
+    public function setEnclosure($enclosure)
+    {
+        $this->_enclosure = $enclosure;
     }
 }

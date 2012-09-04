@@ -1,9 +1,9 @@
 {
-    "name": "noetix/easy-csv",
+    "name": "danisalgueiro/easy-csv",
     "type": "library",
     "description": "Set of PHP 5.3 classes for reading and writing CSV files.",
     "keywords": ["csv"],
-    "homepage": "https://github.com/noetix/EasyCSV",
+    "homepage": "https://github.com/danisalgueiro/easy-csv",
     "license": "MIT",
     "authors": [
         {
@@ -14,6 +14,10 @@
             "name": "Alex Joyce",
             "email": "im@alex-joyce.com",
             "homepage": "http://alex-joyce.com"
+        },
+        {
+            "name": "Dani Salgueiro",
+            "email": "dani@danisalgueiro.com"
         }
     ],
     "require": {
