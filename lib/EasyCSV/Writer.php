@@ -10,6 +10,7 @@ class Writer extends AbstractBase
             $row = explode(',', $row);
             $row = array_map('trim', $row);
         }
+
         return fputcsv($this->_handle, $row, $this->_delimiter, $this->_enclosure);
     }
 
