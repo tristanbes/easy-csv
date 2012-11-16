@@ -1,9 +1,9 @@
 {
-    "name": "danisalgueiro/easy-csv",
+    "name": "tristanbes/easy-csv",
     "type": "library",
     "description": "Set of PHP 5.3 classes for reading and writing CSV files.",
     "keywords": ["csv"],
-    "homepage": "https://github.com/danisalgueiro/easy-csv",
+    "homepage": "https://github.com/tristanbes/easy-csv",
     "license": "MIT",
     "authors": [
         {
