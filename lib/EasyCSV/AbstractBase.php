@@ -24,12 +24,12 @@ abstract class AbstractBase
             fclose($this->_handle);
         }
     }
-    
+
     public function setDelimiter($delimiter)
     {
         $this->_delimiter = $delimiter;
     }
-    
+
     public function setEnclosure($enclosure)
     {
         $this->_enclosure = $enclosure;

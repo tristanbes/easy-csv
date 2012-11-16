@@ -8,7 +8,6 @@ namespace EasyCSV;
  */
 class Reader extends AbstractBase implements \Iterator
 {
-
     private $_headers;
     private $_line;
     private $currentRow;
@@ -20,29 +19,33 @@ class Reader extends AbstractBase implements \Iterator
      * @param unknown_type $path
      * @param unknown_type $mode
      */
-    public function __construct($path, $mode = 'r+')
+    public function __construct($path, $mode = 'r+', $delimiter = ',', $enclosure = '"')
     {
-        parent::__construct($path, $mode);
+        parent::__construct($path, $mode, $delimiter, $enclosure);
         $this->initializate();
     }
 
     /**
      *
      */
-    private function initializate(){
+    private function initializate()
+    {
         $this->currentRow = null;
         $this->_headers = $this->fgetcsv();
-        $this->isValid = $this->_headers !== false;
-        if( is_array($this->_headers) ){
+        $this->isValid  = $this->_headers !== false;
+
+        if (is_array($this->_headers)) {
             $this->_headers = array_map('strtolower', $this->_headers);
         }
+
         $this->_line = 1;
     }
 
     /**
      * @return array
      */
-    protected function fgetcsv(){
+    protected function fgetcsv()
+    {
         return fgetcsv($this->_handle, 1000, $this->_delimiter, $this->_enclosure);
     }
 
@@ -56,9 +59,11 @@ class Reader extends AbstractBase implements \Iterator
             $this->isValid = true;
             $this->_line++;
             $this->currentRow = $this->getCombineRow($row);
+
             return $this->currentRow;
         } else {
             $this->isValid = false;
+
             return $this->isValid;
         }
     }
@@ -67,7 +72,8 @@ class Reader extends AbstractBase implements \Iterator
      *
      * @param array $row
      */
-    private function getCombineRow($row){
+    private function getCombineRow($row)
+    {
         $newRow = array();
         foreach( $this->_headers as $i => $name ){
             if( !isset($row[$i]) ){
@@ -83,7 +89,8 @@ class Reader extends AbstractBase implements \Iterator
      * (non-PHPdoc)
      * @see Iterator::current()
      */
-    public function current(){
+    public function current()
+    {
         return null == $this->currentRow ? $this->getRow() : $this->currentRow;
     }
 
@@ -91,7 +98,8 @@ class Reader extends AbstractBase implements \Iterator
      * (non-PHPdoc)
      * @see Iterator::key()
      */
-    public function key(){
+    public function key()
+    {
         return $this->_line;
     }
 
@@ -99,7 +107,8 @@ class Reader extends AbstractBase implements \Iterator
      * (non-PHPdoc)
      * @see Iterator::next()
      */
-    public function next(){
+    public function next()
+    {
         $this->getRow();
     }
 
@@ -107,7 +116,8 @@ class Reader extends AbstractBase implements \Iterator
      * (non-PHPdoc)
      * @see Iterator::rewind()
      */
-    public function rewind(){
+    public function rewind()
+    {
         $this->closeFile();
         $this->openFile();
         $this->initializate();
@@ -117,7 +127,8 @@ class Reader extends AbstractBase implements \Iterator
      * (non-PHPdoc)
      * @see Iterator::valid()
      */
-    public function valid(){
+    public function valid()
+    {
         return $this->isValid;
     }
 
@@ -137,14 +148,16 @@ class Reader extends AbstractBase implements \Iterator
      *
      * @return number
      */
-    public function getLineNumber(){
+    public function getLineNumber()
+    {
         return $this->_line;
     }
 
     /**
      * @return array
      */
-    protected function getHeaders(){
+    protected function getHeaders()
+    {
         return $this->_headers;
     }
 }
